@@ -69,6 +69,10 @@ def main():
     GAMMA = 0.99
     NUM_OBSTACLES = 12
 
+    TABLE_HEIGHT = 0.5
+    TABLE_WIDTH = 6.0
+    TABLE_LENGTH = 6.0
+
     # UR5 arm pose (straight up, stable during motion)
     UR5_ARM_UP = [0, -np.pi / 2, 0, -np.pi / 2, 0, 0]
     JOINT_FORCE = 1500
@@ -77,7 +81,7 @@ def main():
 
     # Block: 0.05 cube, scale 2.0 → half-height 0.05. Center at z=0.05 → top at 0.1.
     BLOCK_TOP_Z = 0.05 + 0.05  # center + half-height
-    ROBOT_BASE_Z = BLOCK_TOP_Z + 1.0  # fly 1m above blocks
+    ROBOT_BASE_Z = TABLE_HEIGHT  # Move on table
 
     # -------------------------------------------------------------------------
     # 2. Generate obstacles
@@ -116,13 +120,19 @@ def main():
     p.setGravity(0, 0, -9.81)
 
     p.loadURDF("plane.urdf")
-    draw_mobile_grid(ROWS, COLS, GRID_SIZE, CENTER)
+    
+    # Create Table
+    table_visual = p.createVisualShape(p.GEOM_BOX, halfExtents=[TABLE_WIDTH/2, TABLE_LENGTH/2, TABLE_HEIGHT/2], rgbaColor=[0.8, 0.6, 0.4, 1])
+    table_collision = p.createCollisionShape(p.GEOM_BOX, halfExtents=[TABLE_WIDTH/2, TABLE_LENGTH/2, TABLE_HEIGHT/2])
+    p.createMultiBody(baseMass=0, baseCollisionShapeIndex=table_collision, baseVisualShapeIndex=table_visual, basePosition=[0, 0, TABLE_HEIGHT/2])
+
+    draw_mobile_grid(ROWS, COLS, GRID_SIZE, CENTER, z=TABLE_HEIGHT + 0.01)
 
     # Obstacles
     obstacle_urdf = os.path.join("assest", "cube_and_square", "cube_small_cyan.urdf")
     for obs_state in obstacle_states:
-        pos = state_to_position(obs_state, ROWS, COLS, GRID_SIZE, CENTER)
-        p.loadURDF(obstacle_urdf, pos, globalScaling=2.0)
+        pos = state_to_position(obs_state, ROWS, COLS, GRID_SIZE, CENTER, z=TABLE_HEIGHT + 0.05)
+        p.loadURDF(obstacle_urdf, pos, globalScaling=2.0, useFixedBase=True)
 
     # Husky + UR5 (loaded above blocks)
     husky_id = p.loadURDF("husky/husky.urdf", [0, 0, ROBOT_BASE_Z])
@@ -151,11 +161,11 @@ def main():
     # -------------------------------------------------------------------------
     # 6. Execute path
     # -------------------------------------------------------------------------
-    prev_pos = state_to_position(path[0], ROWS, COLS, GRID_SIZE, CENTER)
+    prev_pos = state_to_position(path[0], ROWS, COLS, GRID_SIZE, CENTER, z=ROBOT_BASE_Z)
     steps_per_move = 50
 
     for state in path[1:]:
-        target_pos = state_to_position(state, ROWS, COLS, GRID_SIZE, CENTER)
+        target_pos = state_to_position(state, ROWS, COLS, GRID_SIZE, CENTER, z=ROBOT_BASE_Z)
         p.addUserDebugLine(prev_pos, target_pos, [0, 1, 0], 5)
 
         current_pos, current_orn = p.getBasePositionAndOrientation(husky_id)

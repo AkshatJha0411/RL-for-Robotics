@@ -87,7 +87,9 @@ if __name__ == "__main__":
     obstacle_states = []
     
     if len(available_states) >= num_obstacles:
-        obstacle_states = np.random.choice(available_states, num_obstacles, replace=False)
+        np.random.seed(42)
+        obstacle_states =  np.random.choice(available_states, num_obstacles, replace=False)
+        
         # Convert to standard python ints for safety
         obstacle_states = [int(x) for x in obstacle_states]
         
