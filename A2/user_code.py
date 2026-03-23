@@ -23,10 +23,10 @@ import matplotlib.pyplot as plt
 # ========================================
 NUM_BINS = 10            #5, 10, 20
 STATE_DIM = 3
-NUM_EPISODES = 500
+NUM_EPISODES = 3000
 MAX_STEPS = 240
 
-EPSILON = 0.075        #0.05, 0.1, 0.3
+EPSILON = 0.075      #0.05, 0.1, 0.3
 GAMMA = 0.99             #0.9, 0.95, 0.99
 ALPHA = 0.1            #0.05, 0.75, 0.2
 
@@ -68,7 +68,7 @@ def get_q_table_shape():
 
 def initialize_q_table():
     """Initialize Q-table with zeros."""
-    return np.zeros(get_q_table_shape())
+    return np.full(get_q_table_shape(), 350)
 
 def choose_action(q_table, state, epsilon):
     """Epsilon-greedy action selection."""
@@ -148,8 +148,28 @@ def run_monte_carlo(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GAMMA
     q_table = initialize_q_table()
     episode_rewards = []
 
+    #epsilon_start = epsilon
+    #epsilon_min = epsilon/2
+    #decay = (epsilon_start - epsilon_min) / num_episodes
+
         #my implementation
+    epsilon_start  = max(epsilon, 0.2)
+    epsilon_end    = epsilon / 2.0      
+    decay_episodes = int(0.40 * num_episodes)   
+ 
+    episode_rewards = []
+ 
     for episode in range(num_episodes):
+ 
+        # Linear decay: high → low over the first `decay_episodes` episodes,
+        # then constant at epsilon_end.
+        if episode < decay_episodes:
+            epsilon = (epsilon_start
+                               - (epsilon_start - epsilon_end)
+                               * episode / decay_episodes)
+        else:
+            epsilon = epsilon_end
+        #epsilon = max(epsilon_min, epsilon_start - decay * episode)
         state, _ = env.reset()
         state = discretize_state(extract_position(state))
         episode_data = []
@@ -166,6 +186,8 @@ def run_monte_carlo(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GAMMA
 
             if terminated or truncated:
                 break
+        if len(episode_data) <5:
+            continue
 
         # Compute returns and update Q-values
         G = 0
@@ -199,8 +221,23 @@ def run_q_learning(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GAMMA,
     q_table = initialize_q_table()
     episode_rewards = []
 
-    #my implementation
+    epsilon_start  = max(epsilon, 0.40)   # begin with more exploration
+    epsilon_end    = epsilon / 2.0        # settle just below the passed-in ε
+    decay_episodes = int(0.40 * num_episodes)   # anneal over first 40 %
+ 
+    episode_rewards = []
+ 
     for episode in range(num_episodes):
+ 
+        # Linear decay: high → low over the first `decay_episodes` episodes,
+        # then constant at epsilon_end.
+        if episode < decay_episodes:
+            epsilon = (epsilon_start
+                               - (epsilon_start - epsilon_end)
+                               * episode / decay_episodes)
+        else:
+            epsilon = epsilon_end
+
         state, _ = env.reset()
         state = discretize_state(extract_position(state))
         total_reward = 0
@@ -218,7 +255,7 @@ def run_q_learning(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GAMMA,
 
             if terminated or truncated:
                 break
-
+                
         episode_rewards.append(total_reward)
 
     return q_table, episode_rewards

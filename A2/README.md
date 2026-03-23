@@ -4,7 +4,7 @@
 
 **Environment**: `HoverAviary` from `gym-pybullet-drones`, rendered headless (`gui=False`) for training.
 
-**Final Score: 78.8 / 85 core + 20 / 20 bonus**
+**Final Score: 85 / 85 core + 20 / 20 bonus**
 
 ---
 
@@ -72,7 +72,7 @@ Q(s, a) ← Q(s, a) + α · (G - Q(s, a))
 
 I track visited pairs in a `set()` per episode to enforce first-visit semantics. Epsilon is fixed (no decay) — exploration stays constant throughout training which keeps the policy slightly stochastic.
 
-**Result**: Evaluation reward **449.71**, Final 50-ep avg **297.43**, Convergence at episode **259**. Score: **30/30**.
+**Result**: Evaluation reward **331.10**, Final 50-ep avg **289.26**, Convergence at episode **190**. Score: **30/30**.
 
 ---
 
@@ -90,7 +90,7 @@ The "max over next actions" makes this off-policy — the agent always bootstrap
 
 Epsilon is fixed at 0.075 — slightly lower than the default 0.1 to lean towards exploitation once the policy starts forming.
 
-**Result**: Evaluation reward **449.09**, Final 50-ep avg **324.54**, Convergence at episode **361**. Score: **30/30**.
+**Result**: Evaluation reward **255.58**, Final 50-ep avg **230.91**, Convergence at episode **145**. Score: **30/30**.
 
 ---
 
@@ -164,13 +164,13 @@ The key fix from the original stub: raw observations must go through `extract_po
 
 | Algorithm | Eval Reward | Score |
 |---|---|---|
-| Monte Carlo | 449.71 | 30 / 30 |
-| Q-Learning | 449.09 | 30 / 30 |
-| Experiments | — | 18.8 / 25 |
-| **Core Total** | | **78.8 / 85** |
-| SARSA (bonus) | 374.64 | 5 / 5 |
-| Double Q-Learning (bonus) | 445.08 | 7 / 7 |
-| Experience Replay (bonus) | 361.08 | 8 / 8 |
+| Monte Carlo | 331.10 | 30 / 30 |
+| Q-Learning | 255.58 | 30 / 30 |
+| Experiments | — | 25 / 25 |
+| **Core Total** | | **85 / 85** |
+| SARSA (bonus) | 410.56 | 5 / 5 |
+| Double Q-Learning (bonus) | 374.64 | 7 / 7 |
+| Experience Replay (bonus) | 442.97 | 8 / 8 |
 | **Bonus Total** | | **20 / 20** |
 
 ---
@@ -179,7 +179,7 @@ The key fix from the original stub: raw observations must go through `extract_po
 
 ```bash
 # Core assignment
-python user_code.py
+python user_code.py --num_episodes 900
 
 # Evaluate with grader
 python evaluate_submission.py --student_file user_code.py --method all --seed 42 --min_reward 220 --eval_seeds 3
@@ -187,7 +187,116 @@ python evaluate_submission.py --student_file user_code.py --method all --seed 42
 # Bonus challenges
 python bonus_challenges.py
 ```
+## Results
+```
+============================================================
+FINAL GRADE
+============================================================
 
+Feedback:
+  ✓ Monte Carlo implementation PASSED
+  ✓ TD (Q-Learning) implementation PASSED
+  ✓ Both algorithms converged quickly
+
+Score Breakdown:
+  Monte Carlo: 30.0/30
+  TD Learning: 30.0/30
+  Experiments: 25.0/25
+  -------------------
+  TOTAL: 85.0/85
+
+✓✓✓ PASSED ASSIGNMENT ✓✓✓
+
+Evaluation complete!
+
+
+
+
+============================================================
+EVALUATING BONUS CHALLENGES
+============================================================
+
+--- Challenge 1: SARSA (5 points) ---
+[INFO] BaseAviary.__init__() loaded parameters from the drone .urdf:
+[INFO] m 0.027000, L 0.039700,
+[INFO] ixx 0.000014, iyy 0.000014, izz 0.000022,
+[INFO] kf 3.160000e-10, km 7.940000e-12,
+[INFO] t2w 2.250000, max_speed_kmh 30.000000,
+[INFO] gnd_eff_coeff 11.368590, prop_radius 0.023135,
+[INFO] drag_xy_coeff 0.000001, drag_z_coeff 0.000001,
+[INFO] dw_coeff_1 2267.180000, dw_coeff_2 0.160000, dw_coeff_3 -0.110000
+
+Starting SARSA Training...
+SARSA Episode 50/500, Avg Reward: 345.87 (Epsilon: 0.1858)
+SARSA Episode 100/500, Avg Reward: 412.09 (Epsilon: 0.0677)
+SARSA Episode 150/500, Avg Reward: 397.11 (Epsilon: 0.0246)
+SARSA Episode 200/500, Avg Reward: 391.49 (Epsilon: 0.0090)
+SARSA Episode 250/500, Avg Reward: 410.98 (Epsilon: 0.0033)
+SARSA Episode 300/500, Avg Reward: 410.70 (Epsilon: 0.0012)
+SARSA Episode 350/500, Avg Reward: 410.65 (Epsilon: 0.0004)
+SARSA Episode 400/500, Avg Reward: 410.56 (Epsilon: 0.0002)
+SARSA Episode 450/500, Avg Reward: 410.56 (Epsilon: 0.0001)
+SARSA Episode 500/500, Avg Reward: 410.56 (Epsilon: 0.0000)
+SARSA Training finished in 28.17 seconds.
+SARSA Evaluation: 410.56 (+/- 0.00)
+Bonus Points: 5/5
+
+--- Challenge 2: Double Q-Learning (7 points) ---
+[INFO] BaseAviary.__init__() loaded parameters from the drone .urdf:
+[INFO] m 0.027000, L 0.039700,
+[INFO] ixx 0.000014, iyy 0.000014, izz 0.000022,
+[INFO] kf 3.160000e-10, km 7.940000e-12,
+[INFO] t2w 2.250000, max_speed_kmh 30.000000,
+[INFO] gnd_eff_coeff 11.368590, prop_radius 0.023135,
+[INFO] drag_xy_coeff 0.000001, drag_z_coeff 0.000001,
+[INFO] dw_coeff_1 2267.180000, dw_coeff_2 0.160000, dw_coeff_3 -0.110000
+
+Starting Double Q-Learning Training...
+Double Q-Learning Episode 50/500, Avg Reward: 275.23 (Epsilon: 0.1858)
+Double Q-Learning Episode 100/500, Avg Reward: 274.25 (Epsilon: 0.0677)
+Double Q-Learning Episode 150/500, Avg Reward: 264.48 (Epsilon: 0.0246)
+Double Q-Learning Episode 200/500, Avg Reward: 277.24 (Epsilon: 0.0090)
+Double Q-Learning Episode 250/500, Avg Reward: 375.33 (Epsilon: 0.0033)
+Double Q-Learning Episode 300/500, Avg Reward: 374.81 (Epsilon: 0.0012)
+Double Q-Learning Episode 350/500, Avg Reward: 374.77 (Epsilon: 0.0004)
+Double Q-Learning Episode 400/500, Avg Reward: 374.71 (Epsilon: 0.0002)
+Double Q-Learning Episode 450/500, Avg Reward: 374.65 (Epsilon: 0.0001)
+Double Q-Learning Episode 500/500, Avg Reward: 374.64 (Epsilon: 0.0000)
+Double Q-Learning Training finished in 26.65 seconds.
+Double Q-Learning Evaluation: 374.64 (+/- 0.00)
+Bonus Points: 7/7
+
+--- Challenge 3: Experience Replay (8 points) ---
+[INFO] BaseAviary.__init__() loaded parameters from the drone .urdf:
+[INFO] m 0.027000, L 0.039700,
+[INFO] ixx 0.000014, iyy 0.000014, izz 0.000022,
+[INFO] kf 3.160000e-10, km 7.940000e-12,
+[INFO] t2w 2.250000, max_speed_kmh 30.000000,
+[INFO] gnd_eff_coeff 11.368590, prop_radius 0.023135,
+[INFO] drag_xy_coeff 0.000001, drag_z_coeff 0.000001,
+[INFO] dw_coeff_1 2267.180000, dw_coeff_2 0.160000, dw_coeff_3 -0.110000
+
+Starting Experience Replay Training...
+Experience Replay Episode 50/500, Avg Reward: 289.65 (Epsilon: 0.1858)
+Experience Replay Episode 100/500, Avg Reward: 289.78 (Epsilon: 0.0677)
+Experience Replay Episode 150/500, Avg Reward: 266.41 (Epsilon: 0.0246)
+Experience Replay Episode 200/500, Avg Reward: 323.72 (Epsilon: 0.0090)
+Experience Replay Episode 250/500, Avg Reward: 253.76 (Epsilon: 0.0033)
+Experience Replay Episode 300/500, Avg Reward: 274.15 (Epsilon: 0.0012)
+Experience Replay Episode 350/500, Avg Reward: 303.01 (Epsilon: 0.0004)
+Experience Replay Episode 400/500, Avg Reward: 292.52 (Epsilon: 0.0002)
+Experience Replay Episode 450/500, Avg Reward: 281.50 (Epsilon: 0.0001)
+Experience Replay Episode 500/500, Avg Reward: 237.10 (Epsilon: 0.0000)
+Experience Replay Training finished in 41.32 seconds.
+Experience Replay Evaluation: 442.97 (+/- 0.00)
+Bonus Points: 8/8
+
+============================================================
+BONUS CHALLENGES COMPLETE
+============================================================
+
+
+```
 ---
 
 ## References

@@ -1,0 +1,98 @@
+gamma=0.99, alpha=0.1, num_bins=10
+e=0.1:
+Monte Carlo - Final Avg Reward (last 50): 258.70 Q-Learning - Final Avg Reward (last 50): 374.32 
+Monte Carlo - Evaluation: 98.02 (+/- 0.00) Q-Learning - Evaluation: 451.46 (+/- 0.00)
+
+e=0.05:
+Monte Carlo - Final Avg Reward (last 50): 311.83 Q-Learning - Final Avg Reward (last 50): 418.70 
+Monte Carlo - Evaluation: 331.10 (+/- 0.00) Q-Learning - Evaluation: 434.85 (+/- 0.00)
+
+e=0.3:
+Monte Carlo - Final Avg Reward (last 50): 274.10 Q-Learning - Final Avg Reward (last 50): 314.31 
+Monte Carlo - Evaluation: 255.60 (+/- 0.00) Q-Learning - Evaluation: 374.64 (+/- 0.00)
+
+e=0.075:
+Monte Carlo - Final Avg Reward (last 50): 304.34 Q-Learning  - Final Avg Reward (last 50): 392.08
+Monte Carlo - Evaluation: 439.27 (+/- 0.00) Q-Learning  - Evaluation: 447.90 (+/- 0.00)
+
+
+e=0.075, alpha=0.1, num_bins=10
+gamma=0.99:
+Monte Carlo - Final Avg Reward (last 50): 304.34 
+Q-Learning  - Final Avg Reward (last 50): 392.08
+
+Monte Carlo - Evaluation: 439.27 (+/- 0.00) 
+Q-Learning  - Evaluation: 447.90 (+/- 0.00)
+
+gamma=0.95:
+Monte Carlo - Final Avg Reward (last 50): 316.08
+Q-Learning  - Final Avg Reward (last 50): 381.61
+
+Monte Carlo - Evaluation: 331.10 (+/- 0.00)
+Q-Learning  - Evaluation: 453.86 (+/- 0.00)
+
+gamma=0.9
+Monte Carlo - Final Avg Reward (last 50): 138.37
+Q-Learning  - Final Avg Reward (last 50): 274.84
+
+Monte Carlo - Evaluation: 137.43 (+/- 0.00)
+Q-Learning  - Evaluation: 165.10 (+/- 0.00)
+
+e=0.075, gamma=0.99, num_bins=10
+alpha=0.1:
+Monte Carlo - Final Avg Reward (last 50): 304.34 
+Q-Learning  - Final Avg Reward (last 50): 392.08
+
+Monte Carlo - Evaluation: 439.27 (+/- 0.00) 
+Q-Learning  - Evaluation: 447.90 (+/- 0.00)
+
+alpha=0.05:
+Monte Carlo - Final Avg Reward (last 50): 295.17
+Q-Learning  - Final Avg Reward (last 50): 318.50
+
+Monte Carlo - Evaluation: 196.39 (+/- 0.00)
+Q-Learning  - Evaluation: 374.64 (+/- 0.00)
+
+alpha=0.2:
+Monte Carlo - Final Avg Reward (last 50): 272.85
+Q-Learning  - Final Avg Reward (last 50): 353.70
+
+Monte Carlo - Evaluation: 331.10 (+/- 0.00)
+Q-Learning  - Evaluation: 127.27 (+/- 0.00)
+
+alpha=0.075:
+Monte Carlo - Final Avg Reward (last 50): 263.66
+Q-Learning  - Final Avg Reward (last 50): 373.47
+
+Monte Carlo - Evaluation: 374.64 (+/- 0.00)
+Q-Learning  - Evaluation: 255.60 (+/- 0.00)
+
+e=0.075, gamma=0.99, alpha=0.1
+num_bins=10:
+Monte Carlo - Final Avg Reward (last 50): 259.59
+Q-Learning  - Final Avg Reward (last 50): 396.87
+
+Monte Carlo - Evaluation: 149.59 (+/- 0.00)
+Q-Learning  - Evaluation: 457.29 (+/- 0.00)
+
+num_bins=5:
+Monte Carlo - Final Avg Reward (last 50): 252.59
+Q-Learning  - Final Avg Reward (last 50): 257.80
+
+Monte Carlo - Evaluation: 116.11 (+/- 0.00)
+Q-Learning  - Evaluation: 119.83 (+/- 0.00)
+
+num_bins=20:
+Monte Carlo - Final Avg Reward (last 50): 229.96
+Q-Learning  - Final Avg Reward (last 50): 413.58
+
+Monte Carlo - Evaluation: 255.60 (+/- 0.00)
+Q-Learning  - Evaluation: 331.10 (+/- 0.00)
+
+final:
+
+Monte Carlo - Final Avg Reward (last 50): 267.39
+Q-Learning  - Final Avg Reward (last 50): 410.01
+
+Monte Carlo - Evaluation: 255.60 (+/- 0.00)
+Q-Learning  - Evaluation: 453.28 (+/- 0.00)
