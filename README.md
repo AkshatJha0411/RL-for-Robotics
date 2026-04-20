@@ -1,14 +1,13 @@
 # Reinforcement Learning - Assignments
 
+Collaborative coursework from Semester 6. Partners: [Kusum Agrawal](https://github.com/AgrawalKusum) for A1 & A2, [Pujan Purohit](https://github.com/PujanPurohit) for A3.
+
 Course assignments for Semester 6 RL for Robotics. Each assignment has its own folder with detailed instructions and running commands.
 
 ---
 
 ## Assignment 1: Grid Navigation using Dynamic Programming
 
-### Team
-1. [Akshat Jha](https://github.com/AkshatJha0411)
-2. [Kusum Agrawal](https://github.com/AgrawalKusum)
 
 ### Demo of Husky:
 <p align="center">
@@ -23,12 +22,9 @@ Implements **Policy Iteration** and **Value Iteration** for robotic path plannin
 
 ## Assignment 2: Drone Hovering using Model-Free Control
 
-### Team
-1. [Akshat Jha](https://github.com/AkshatJha0411)
-2. [Kusum Agrawal](https://github.com/AgrawalKusum)
 
 <p align="center">
-  <img src="A2.gif" alt="Extra credits – Mobile base (Husky + UR5) navigation" width="600"/>
+  <img src="A2.gif" alt="Drone hovering" width="600"/>
 </p>
 
 Implements **Monte Carlo Control** and **Q-Learning (TD)** to teach a simulated drone to hover at a fixed 3D target position using the `gym-pybullet-drones` HoverAviary environment. The continuous position state is discretized into a 10-bin-per-axis Q-table, and a 1D thrust action space (`-1`, `0`, `+1`) is used. Also includes three bonus challenges — **SARSA**, **Double Q-Learning**, and **Experience Replay** — all of which were completed for full bonus credit.
@@ -41,9 +37,6 @@ Implements **Monte Carlo Control** and **Q-Learning (TD)** to teach a simulated 
 
 ## Assignment 3: Biped Platform Jump with Deep RL
 
-### Team
-1. [Akshat Jha](https://github.com/AkshatJha0411)
-2. [Pujan Purohit](https://github.com/PujanPurohit)
 
 <p align="center">
   <img src="A3.gif" alt="Biped platform jump using SAC" width="600"/>
