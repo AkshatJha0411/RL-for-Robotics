@@ -39,6 +39,20 @@ Implements **Monte Carlo Control** and **Q-Learning (TD)** to teach a simulated 
 
 ---
 
-## Assignment 3
+## Assignment 3: Biped Platform Jump with Deep RL
 
-*To be added when done.*
+### Team
+1. [Akshat Jha](https://github.com/AkshatJha0411)
+2. [Pujan Purohit](https://github.com/PujanPurohit)
+
+<p align="center">
+  <img src="A3.gif" alt="Biped platform jump using SAC" width="600"/>
+</p>
+
+Trains a 6-DoF biped robot to **jump off a 1 m platform and land upright** using **SAC (Soft Actor-Critic)** in PyBullet. The environment features a multi-phase reward function covering edge approach, controlled flight, and stable landing. A lightweight landing-assist controller bootstraps early learning by blending a safe posture near the ground. Hyperparameters were tuned across three configurations with the best achieving ~10% fall rate.
+
+```bash
+cd A3 && python main.py --mode test --model_path diff-configs/models-jump/config3/sac_biped_final --render --episodes 5
+```
+
+*See [A3/README.md](A3/README.md) for implementation details, hyperparameter tuning, evaluation metrics, and analysis.*
